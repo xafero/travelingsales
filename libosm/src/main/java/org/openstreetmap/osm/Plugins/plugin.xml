@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<!DOCTYPE plugin PUBLIC "-//JPF//Java Plug-in Manifest 1.0" "http://jpf.sourceforge.net/plugin_1_0.dtd">
+<plugin id="org.openstreetmap.osm.Plugins.Core" version="2.5.2.0"
+	class="org.openstreetmap.osm.Plugins.CorePlugin">
+	<extension-point id="GenericPlugin">
+		<parameter-def id="interfaceProvided" />
+		<parameter-def id="class" />
+		<parameter-def id="name" />
+	</extension-point>
+</plugin>

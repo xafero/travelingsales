@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ODRPaintVisitor configuration data
+    Author: Sven Koehler (tdad@users.sourceforge.net)
+    
+    This file (will) holds most of the configuration data, ODRPaintVisitor will
+    be using. At first, way tags are mapped to way types (see way-definition). The
+    next step is to decide, how a certain way-type will be displayed (see way-
+    visualization) and the last step is to constitute which ways types will be
+    displayed at which zoom-level at which width.
+    
+    Oh and btw...this file is valid (according to validome.org).
+-->
+<!DOCTYPE odr-visualization-data [
+  <!ELEMENT type (#PCDATA)>
+  <!ELEMENT min-zoom-level (#PCDATA)>
+  <!ELEMENT max-zoom-level (#PCDATA)>
+  <!ELEMENT stroke-color (#PCDATA)>
+  <!ATTLIST stroke-color 
+            dashed (true | 
+                    false)      #IMPLIED
+            dash-array CDATA    #IMPLIED
+            >
+  <!ELEMENT outline-color (#PCDATA)>
+  <!ELEMENT visualization-type (#PCDATA)>
+  <!ELEMENT way-visualization (
+            type, min-zoom-level, max-zoom-level,
+            stroke-color, outline-color, visualization-type
+            )>
+
+  <!ELEMENT way-width (#PCDATA)>
+  <!ATTLIST way-width type (
+            __MOTORWAY    |
+            __PRIMARY     |
+            __SECONDARY   |
+            __TERTIARY    |
+            __TRUNK       |
+            __RAILWAY     |
+            __WATERWAY    |
+            __CYCLEWAY    |
+            __FOOTWAY     |
+            __SERVICE     |
+            __LEISURE     |
+            __WOOD        |
+            __WATER       |
+            __TRACK       |
+            __PARKING     |
+            __RESIDENTIAL |
+            __PEDESTRIAN) #REQUIRED>
+  
+  <!ELEMENT zoom-level-data (way-width+)>
+  <!ATTLIST zoom-level-data level (1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20) #REQUIRED>
+  
+  <!ELEMENT way-definition (#PCDATA)>
+  <!ATTLIST way-definition
+            key     CDATA   #REQUIRED
+            value   CDATA   #IMPLIED> 
+
+  <!ELEMENT map (#PCDATA)>
+  <!ATTLIST map
+            bgcolor CDATA   #REQUIRED> 
+
+  
+  <!ELEMENT odr-visualization-data (map*, way-definition+, way-visualization+, zoom-level-data+)>
+  ]>
+
+<!--
+TODO
+    - fill in the correct way widths
+    - introduce "show-name" attribute to zoom-level-data
+    - find a way to make some names shown as little shields
+    - fetch some more info from http://svn.openstreetmap.org/applications/rendering/mapnik/osm.xml
+    - do sth. similar for the map features 
+    - additional types: place, some more landuse values, tourism, shop, amenities, and some general improvements (see http://wiki.openstreetmap.org/index.php/Map_features)
+-->
+
+
+<odr-visualization-data>
+  <!-- Global map preferences -->
+  <map-definition bgcolor="0x000000"/>
+  
+  <!-- under development -->
+  <!--
+    which key/value combination makes which way type?
+  -->
+  <way-definition key="landuse" value="forest">__WOOD</way-definition>
+  <way-definition key="landuse" value="wood">__WOOD</way-definition>
+  
+  <way-definition key="leisure">__LEISURE</way-definition>
+  
+  <way-definition key="waterway">__WATERWAY</way-definition>
+  
+  <way-definition key="natural" value="water">__WATER</way-definition>
+  
+  <way-definition key="amenity" value="parking">__PARKING</way-definition>
+  
+  <way-definition key="highway" value="motorway">__MOTORWAY</way-definition>
+  <way-definition key="highway" value="motorway_link">__MOTORWAY</way-definition>
+  <way-definition key="highway" value="trunk">__TRUNK</way-definition>
+  <way-definition key="highway" value="trunk_link">__TRUNK</way-definition>
+  <way-definition key="highway" value="primary">__PRIMARY</way-definition>
+  <way-definition key="highway" value="secondary">__SECONDARY</way-definition>
+  <way-definition key="highway" value="tertiary">__TERTIARY</way-definition>
+  <way-definition key="highway" value="residential">__RESIDENTIAL</way-definition>
+  <way-definition key="highway" value="minor">__RESIDENTIAL</way-definition>
+  <way-definition key="highway" value="service">__SERVICE</way-definition>
+  <way-definition key="highway" value="footway">__FOOTWAY</way-definition>
+  <way-definition key="highway" value="bridleway">__FOOTWAY</way-definition>
+  <way-definition key="highway" value="cycleway">__CYCLEWAY</way-definition>
+  <way-definition key="highway" value="track">__TRACK</way-definition>
+  <way-definition key="highway" value="pedestrian">__PEDESTRIAN</way-definition>
+  <!-- some default value -->
+  <way-definition key="highway">__RESIDENTIAL</way-definition>
+  
+  <way-definition key="railway">__RAILWAY</way-definition>
+  
+  <!--
+    how should a way type be displayed?
+  -->
+  <way-visualization>
+    <type>__MOTORWAY</type>
+    <min-zoom-level>4</min-zoom-level>
+    <max-zoom-level>20</max-zoom-level>
+    <stroke-color>0x506077</stroke-color>
+    <outline-color>0x777777</outline-color>
+    <visualization-type>org.openstreetmap.travelingsalesman.painting.odr.PathWay</visualization-type>
+  </way-visualization>
+  
+  <way-visualization>
+    <type>__PRIMARY</type>
+    <min-zoom-level>5</min-zoom-level>
+    <max-zoom-level>20</max-zoom-level>
+    <stroke-color dashed="false">0x8d4346</stroke-color>
+    <outline-color>0x777777</outline-color>
+    <visualization-type>org.openstreetmap.travelingsalesman.painting.odr.PathWay</visualization-type>
+  </way-visualization>
+
+  <way-visualization>
+    <type>__SECONDARY</type>
+    <min-zoom-level>7</min-zoom-level>
+    <max-zoom-level>20</max-zoom-level>
+    <stroke-color>0xa37b48</stroke-color>
+    <outline-color>0x777777</outline-color>
+    <visualization-type>org.openstreetmap.travelingsalesman.painting.odr.PathWay</visualization-type>
+</way-visualization>
+  
+  <way-visualization>
+    <type>____TERTIARY</type>
+    <min-zoom-level>14</min-zoom-level>
+    <max-zoom-level>20</max-zoom-level>
+    <stroke-color>0x999999</stroke-color>
+    <outline-color>0x777777</outline-color>
+    <visualization-type>org.openstreetmap.travelingsalesman.painting.odr.PathWay</visualization-type>
+</way-visualization>
+  
+  <way-visualization>
+    <type>__TRUNK</type>
+    <min-zoom-level>10</min-zoom-level>
+    <max-zoom-level>20</max-zoom-level>
+    <stroke-color>0x7fc97f</stroke-color>
+    <outline-color>0x777777</outline-color>
+    <visualization-type>org.openstreetmap.travelingsalesman.painting.odr.PathWay</visualization-type>
+</way-visualization>
+
+  <way-visualization>
+    <type>__RAILWAY</type>
+    <min-zoom-level>10</min-zoom-level>
+    <max-zoom-level>20</max-zoom-level>
+    <stroke-color dashed="true" dash-array="5,3">0xAAAAAA</stroke-color>
+    <outline-color>0x777777</outline-color>
+    <visualization-type>org.openstreetmap.travelingsalesman.painting.odr.PathWay</visualization-type>
+</way-visualization>
+
+  <way-visualization>
+    <type>__WATERWAY</type>
+    <min-zoom-level>10</min-zoom-level>
+    <max-zoom-level>20</max-zoom-level>
+    <stroke-color>0xb5d0d0</stroke-color>
+    <outline-color>0x777777</outline-color>
+    <visualization-type>org.openstreetmap.travelingsalesman.painting.odr.PathWay</visualization-type>
+</way-visualization>
+
+  <way-visualization>
+    <!-- blaue gleichmäßig gestrichelte linie -->
+    <type>__CYCLEWAY</type>
+    <min-zoom-level>13</min-zoom-level>
+    <max-zoom-level>20</max-zoom-level>
+    <stroke-color dashed="false" dash-array="4">0xFFFFFF</stroke-color>
+    <outline-color>0x777777</outline-color>
+    <visualization-type>org.openstreetmap.travelingsalesman.painting.odr.PathWay</visualization-type>
+</way-visualization>
+
+  <way-visualization>
+    <type>__FOOTWAY</type>
+    <min-zoom-level>13</min-zoom-level>
+    <max-zoom-level>20</max-zoom-level>
+    <stroke-color dashed="false" dash-array="2">0xFFFFFF</stroke-color>
+    <outline-color>0x777777</outline-color>
+    <visualization-type>org.openstreetmap.travelingsalesman.painting.odr.PathWay</visualization-type>
+</way-visualization>
+
+  <way-visualization>
+    <type>__SERVICE</type>
+    <min-zoom-level>14</min-zoom-level>
+    <max-zoom-level>20</max-zoom-level>
+    <stroke-color>0x999999</stroke-color>
+    <outline-color>0x777777</outline-color>
+    <visualization-type>org.openstreetmap.travelingsalesman.painting.odr.PathWay</visualization-type>
+</way-visualization>
+
+  <way-visualization>
+    <type>__LEISURE</type>
+    <min-zoom-level>10</min-zoom-level>
+    <max-zoom-level>20</max-zoom-level>
+    <stroke-color>0xf2caea</stroke-color>
+    <outline-color>0x777777</outline-color>
+    <visualization-type>org.openstreetmap.travelingsalesman.painting.odr.PolygonWay</visualization-type>
+</way-visualization>
+
+  <way-visualization>
+    <type>__WOOD</type>
+    <min-zoom-level>10</min-zoom-level>
+    <max-zoom-level>20</max-zoom-level>
+    <stroke-color>0xaed1a0</stroke-color>
+    <outline-color>0x777777</outline-color>
+    <visualization-type>org.openstreetmap.travelingsalesman.painting.odr.PolygonWay</visualization-type>
+</way-visualization>
+
+  <way-visualization>
+    <type>__WATER</type>
+    <min-zoom-level>14</min-zoom-level>
+    <max-zoom-level>20</max-zoom-level>
+    <stroke-color>0xb5d0d0</stroke-color>
+    <outline-color>0x777777</outline-color>
+    <visualization-type>org.openstreetmap.travelingsalesman.painting.odr.PolygonWay</visualization-type>
+</way-visualization>
+
+  <way-visualization>
+    <!-- unregelmäßig gestrichelte linie 4,2 -->
+    <type>__TRACK</type>
+    <min-zoom-level>14</min-zoom-level>
+    <max-zoom-level>20</max-zoom-level>
+    <stroke-color dashed="true" dash-array="4,2">0xFFFFFF</stroke-color>
+    <outline-color>0x777777</outline-color>
+    <visualization-type>org.openstreetmap.travelingsalesman.painting.odr.PathWay</visualization-type>
+</way-visualization>
+
+  <way-visualization>
+    <type>__RESIDENTIAL</type>
+    <min-zoom-level>13</min-zoom-level>
+    <max-zoom-level>20</max-zoom-level>
+    <stroke-color>0xdddddd</stroke-color>
+    <outline-color>0x777777</outline-color>
+    <visualization-type>org.openstreetmap.travelingsalesman.painting.odr.PathWay</visualization-type>
+</way-visualization>
+
+  <way-visualization>
+    <type>__PARKING</type>
+    <min-zoom-level>13</min-zoom-level>
+    <max-zoom-level>20</max-zoom-level>
+    <stroke-color>0xf7efb7</stroke-color>
+    <outline-color>0x777777</outline-color>
+    <visualization-type>org.openstreetmap.travelingsalesman.painting.odr.PolygonWay</visualization-type>
+  </way-visualization>
+
+  <way-visualization>
+    <type>__PEDESTRIAN</type>
+    <min-zoom-level>14</min-zoom-level>
+    <max-zoom-level>20</max-zoom-level>
+    <stroke-color>0xcccccc</stroke-color>
+    <outline-color>0x777777</outline-color>
+    <visualization-type>org.openstreetmap.travelingsalesman.painting.odr.PathWay</visualization-type>
+  </way-visualization>
+
+
+
+  <!-- 
+    constitue which way types should be displayed at which zoom level 
+  -->
+  
+  <zoom-level-data level="4">
+    <!-- 35 000 000 - 18 000 000 -->
+    <way-width type="__MOTORWAY">1</way-width>
+    <way-width type="__TRUNK">1</way-width>
+  </zoom-level-data>
+
+  <zoom-level-data level="5">
+    <!-- 18 000 000 - 8 000 000 -->
+    <way-width type="__MOTORWAY">1</way-width>
+    <way-width type="__TRUNK">1</way-width>
+    <way-width type="__PRIMARY">0.7</way-width>
+  </zoom-level-data>
+  
+  <zoom-level-data level="6">
+    <!-- 8 000 000 - 4 000 000 -->
+    <way-width type="__MOTORWAY">2</way-width>
+    <way-width type="__TRUNK">1</way-width>
+    <way-width type="__PRIMARY">0.7</way-width>
+  </zoom-level-data>
+ 
+  <zoom-level-data level="7">
+    <!-- 4 000 000 - 2 000 000 -->
+    <way-width type="__MOTORWAY">2</way-width>
+    <way-width type="__TRUNK">2</way-width>
+    <way-width type="__PRIMARY">2</way-width>
+    <way-width type="__RAILWAY">1</way-width>
+  </zoom-level-data>
+ 
+  <zoom-level-data level="8">
+    <!-- 2 000 000 - 1 000 000 -->
+    <way-width type="__MOTORWAY">2</way-width>
+    <way-width type="__TRUNK">2</way-width>
+    <way-width type="__PRIMARY">2</way-width>
+    <way-width type="__RAILWAY">1</way-width>
+  </zoom-level-data>
+ 
+  <zoom-level-data level="9">
+    <!-- 1 000 000 - 500 000 -->
+    <way-width type="__MOTORWAY">3</way-width>
+    <way-width type="__TRUNK">2</way-width>
+    <way-width type="__PRIMARY">2</way-width>
+    <way-width type="__RAILWAY">1</way-width>
+  </zoom-level-data>
+ 
+  <zoom-level-data level="10">
+    <!-- 500 000 - 250 000 -->
+    <way-width type="__MOTORWAY">4</way-width>
+    <way-width type="__TRUNK">3</way-width>
+    <way-width type="__PRIMARY">3</way-width>
+    <way-width type="__TRUNK">2.7</way-width>
+    <way-width type="__RAILWAY">1</way-width>
+    <way-width type="__WATERWAY">2</way-width>
+    <way-width type="__LEISURE">2</way-width>
+    <way-width type="__WOOD">2</way-width>
+  </zoom-level-data>
+ 
+  <zoom-level-data level="11">
+    <!-- 250 000 - 125 000 -->
+    <way-width type="__MOTORWAY">4.5</way-width>
+    <way-width type="__TRUNK">3.7</way-width>
+    <way-width type="__PRIMARY">3</way-width>
+    <way-width type="__RAILWAY">2</way-width>
+    <way-width type="__WATERWAY">2</way-width>
+    <way-width type="__LEISURE">2</way-width>
+    <way-width type="__WOOD">2</way-width>
+  </zoom-level-data>
+ 
+  <zoom-level-data level="12">
+    <!-- 125 000 - 65 000 -->
+    <way-width type="__MOTORWAY">7</way-width>
+    <way-width type="__TRUNK">6.7</way-width>
+    <way-width type="__PRIMARY">6</way-width>
+    <way-width type="__SECONDARY">5</way-width>
+    <way-width type="__TERTIARY">4.5</way-width>
+    <way-width type="__RAILWAY">2</way-width>
+    <way-width type="__WATERWAY">2</way-width>
+    <way-width type="__LEISURE">2</way-width>
+    <way-width type="__WOOD">2</way-width>
+  </zoom-level-data>
+ 
+  <zoom-level-data level="13">
+    <!-- 65 000 - 30 000 -->
+    <way-width type="__MOTORWAY">7</way-width>
+    <way-width type="__TRUNK">6.7</way-width>
+    <way-width type="__PRIMARY">6</way-width>
+    <way-width type="__SECONDARY">5</way-width>
+    <way-width type="__TERTIARY">4.5</way-width>
+    <way-width type="__RESIDENTIAL">4</way-width>
+    <way-width type="__SERVICE">3</way-width>
+    <way-width type="__RAILWAY">2</way-width>
+    <way-width type="__WATERWAY">2</way-width>
+    <way-width type="__CYCLEWAY">2</way-width>
+    <way-width type="__FOOTWAY">2</way-width>
+    <way-width type="__LEISURE">2</way-width>
+    <way-width type="__WOOD">2</way-width>
+    <way-width type="__PARKING">2</way-width>
+  </zoom-level-data>
+ 
+  <zoom-level-data level="14">
+    <!-- 30 000 - 15 000 -->
+    <way-width type="__MOTORWAY">7</way-width>
+    <way-width type="__TRUNK">6.7</way-width>
+    <way-width type="__PRIMARY">6</way-width>
+    <way-width type="__SECONDARY">5</way-width>
+    <way-width type="__TERTIARY">4.5</way-width>
+    <way-width type="__RESIDENTIAL">4</way-width>
+    <way-width type="__SERVICE">3</way-width>
+    <way-width type="__RAILWAY">2</way-width>
+    <way-width type="__WATERWAY">2</way-width>
+    <way-width type="__CYCLEWAY">2</way-width>
+    <way-width type="__FOOTWAY">2</way-width>
+    <way-width type="__LEISURE">2</way-width>
+    <way-width type="__WOOD">2</way-width>
+    <way-width type="__WATER">2</way-width>
+    <way-width type="__TRACK">2</way-width>
+    <way-width type="__PARKING">2</way-width>
+    <way-width type="__PEDESTRIAN">2</way-width>
+  </zoom-level-data>
+  
+  <zoom-level-data level="15">
+    <!-- 15 000 - 8 000 -->
+    <way-width type="__MOTORWAY">13</way-width>
+    <way-width type="__TRUNK">12.7</way-width>
+    <way-width type="__PRIMARY">12</way-width>
+    <way-width type="__SECONDARY">10</way-width>
+    <way-width type="__TERTIARY">9.5</way-width>
+    <way-width type="__RESIDENTIAL">7</way-width>
+    <way-width type="__SERVICE">6</way-width>
+    <way-width type="__RAILWAY">2</way-width>
+    <way-width type="__WATERWAY">2</way-width>
+    <way-width type="__CYCLEWAY">2</way-width>
+    <way-width type="__FOOTWAY">2</way-width>
+    <way-width type="__SERVICE">2</way-width>
+    <way-width type="__LEISURE">2</way-width>
+    <way-width type="__WOOD">2</way-width>
+    <way-width type="__WATER">2</way-width>
+    <way-width type="__TRACK">2</way-width>
+    <way-width type="__PARKING">2</way-width>
+    <way-width type="__PEDESTRIAN">2</way-width>
+  </zoom-level-data>
+  
+  <zoom-level-data level="16">
+    <!-- 8 000 - 4 000 -->
+    <way-width type="__MOTORWAY">13</way-width>
+    <way-width type="__TRUNK">12.7</way-width>
+    <way-width type="__PRIMARY">12</way-width>
+    <way-width type="__SECONDARY">10</way-width>
+    <way-width type="__TERTIARY">9.5</way-width>
+    <way-width type="__RESIDENTIAL">7</way-width>
+    <way-width type="__SERVICE">6</way-width>
+    <way-width type="__RAILWAY">2</way-width>
+    <way-width type="__WATERWAY">2</way-width>
+    <way-width type="__CYCLEWAY">2</way-width>
+    <way-width type="__FOOTWAY">2</way-width>
+    <way-width type="__SERVICE">2</way-width>
+    <way-width type="__LEISURE">2</way-width>
+    <way-width type="__WOOD">2</way-width>
+    <way-width type="__WATER">2</way-width>
+    <way-width type="__TRACK">2</way-width>
+    <way-width type="__PARKING">2</way-width>
+    <way-width type="__PEDESTRIAN">2</way-width>
+  </zoom-level-data>
+  
+  <zoom-level-data level="17">
+    <!-- 4 000 - 0 -->
+    <way-width type="__MOTORWAY">17</way-width>
+    <way-width type="__TRUNK">16.7</way-width>
+    <way-width type="__PRIMARY">16</way-width>
+    <way-width type="__SECONDARY">15</way-width>
+    <way-width type="__TERTIARY">12</way-width>
+    <way-width type="__RESIDENTIAL">10</way-width>
+    <way-width type="__SERVICE">8</way-width>
+    <way-width type="__RAILWAY">2</way-width>
+    <way-width type="__WATERWAY">2</way-width>
+    <way-width type="__CYCLEWAY">2</way-width>
+    <way-width type="__FOOTWAY">2</way-width>
+    <way-width type="__SERVICE">2</way-width>
+    <way-width type="__LEISURE">2</way-width>
+    <way-width type="__WOOD">2</way-width>
+    <way-width type="__WATER">2</way-width>
+    <way-width type="__TRACK">2</way-width>
+    <way-width type="__PARKING">2</way-width>
+    <way-width type="__PEDESTRIAN">2</way-width>
+  </zoom-level-data>
+ 
+</odr-visualization-data>
