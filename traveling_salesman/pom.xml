@@ -1,0 +1,106 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.sourceforge.travelingsales</groupId>
+	<artifactId>travelingSalesman</artifactId>
+	<version>2.5.3</version>
+	<packaging>jar</packaging>
+
+	<name>TravelingSalesman - Navigator</name>
+	<url>http://travelingsales.sourceforge.net</url>
+
+	<description>Traveling Salesman is a navigation-software for laptops using OpenStreetMap.</description>
+
+	<licenses>
+		<license>
+			<name>General Public Licence (GPL)</name>
+			<url>http://www.gnu.org/licenses/gpl-3.0.html</url>
+			<distribution>repo</distribution>
+			<comments>GPL Version 3 or newer</comments>
+		</license>
+	</licenses>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>org.openstreetmap.travelingsalesman.Main</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.dstovall</groupId>
+				<artifactId>onejar-maven-plugin</artifactId>
+				<version>1.4.4</version>
+				<executions>
+					<execution>
+						<configuration>
+							<attachToBuild>true</attachToBuild>
+							<classifier>onejar</classifier>
+						</configuration>
+						<goals>
+							<goal>one-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>onejar-maven-plugin.googlecode.com</id>
+			<url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.travelingsales</groupId>
+			<artifactId>libosm</artifactId>
+			<version>2.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.travelingsales</groupId>
+			<artifactId>osmnavigation</artifactId>
+			<version>2.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>l2fprod</groupId>
+			<artifactId>l2fprod-common-all</artifactId>
+			<version>7.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.177</version>
+		</dependency>
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>altano</id>
+			<name>Altano</name>
+			<url>http://altano.it-innovation.soton.ac.uk/maven2/release/vim</url>
+		</repository>
+	</repositories>
+</project>

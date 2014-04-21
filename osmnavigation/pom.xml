@@ -1,0 +1,63 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>net.sourceforge.travelingsales</groupId>
+	<artifactId>osmnavigation</artifactId>
+	<version>2.5.3</version>
+	<packaging>jar</packaging>
+
+	<name>TravelingSalesman - osmNavigation</name>
+	<url>http://travelingsales.sourceforge.net</url>
+	<description>
+        osmNavigation is a library for writing navigation and route-finding -applications. It is based on libOSM.
+    </description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
+	</properties>
+
+	<licenses>
+		<license>
+			<name>General Public Licence (GPL)</name>
+			<url>http://www.gnu.org/licenses/gpl-3.0.html</url>
+			<distribution>repo</distribution>
+			<comments>GPL Version 3 or newer</comments>
+		</license>
+	</licenses>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openstreetmap.osmosis</groupId>
+			<artifactId>osmosis-core</artifactId>
+			<version>0.43.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.travelingsales</groupId>
+			<artifactId>libosm</artifactId>
+			<version>2.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>speechd</groupId>
+			<artifactId>speechd-cvs</artifactId>
+			<version>20090321</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/speechd-cvs-20090321.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>org.rxtx</groupId>
+			<artifactId>rxtx</artifactId>
+			<version>2.1.7</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/RXTXcomm.jar</systemPath>
+		</dependency>
+	</dependencies>
+</project>
